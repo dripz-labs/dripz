@@ -1,0 +1,23 @@
+[package]
+name = "dripz-curves"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+description = "Five time-weighted curve types for Solana LBPs: Linear, Exponential, Step, Dutch Auction, Fair Discovery. Reference implementation following Balancer V2 weighted pool math."
+repository.workspace = true
+homepage.workspace = true
+keywords = ["solana", "lbp", "weighted-pool", "balancer", "dripz"]
+categories = ["mathematics", "finance"]
+readme = "README.md"
+
+[dependencies]
+serde = { workspace = true, optional = true }
+thiserror = { workspace = true }
+
+[features]
+default = []
+serde = ["dep:serde"]
+
+[lib]
+doctest = false
