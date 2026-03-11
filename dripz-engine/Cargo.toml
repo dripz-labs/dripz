@@ -1,0 +1,25 @@
+[package]
+name = "dripz-engine"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+description = "Balancer V2 weighted pool engine for Dripz LBPs: integer spot price, buy / sell quoting, and curve-aware reweighting."
+repository.workspace = true
+homepage.workspace = true
+keywords = ["solana", "balancer", "weighted-pool", "lbp", "dripz"]
+categories = ["mathematics", "finance"]
+
+[dependencies]
+thiserror = { workspace = true }
+dripz-curves = { path = "../dripz-curves", version = "0.1.0" }
+rust_decimal = { workspace = true }
+rust_decimal_macros = { workspace = true }
+serde = { workspace = true, optional = true }
+
+[features]
+default = []
+serde = ["dep:serde", "dripz-curves/serde"]
+
+[lib]
+doctest = false
