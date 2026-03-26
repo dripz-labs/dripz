@@ -1,0 +1,24 @@
+[package]
+name = "dripz-snipeguard"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+description = "Anti-snipe primitives for Dripz LBP launches: commit-reveal, per-tx max buy cap, and per-wallet rolling window."
+repository.workspace = true
+homepage.workspace = true
+keywords = ["solana", "mev", "anti-snipe", "lbp", "dripz"]
+categories = ["cryptography", "finance"]
+
+[dependencies]
+thiserror = { workspace = true }
+sha2 = { workspace = true }
+hex = { workspace = true }
+serde = { workspace = true, optional = true }
+
+[features]
+default = []
+serde = ["dep:serde"]
+
+[lib]
+doctest = false
