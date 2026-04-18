@@ -1,0 +1,25 @@
+[package]
+name = "dripz-cli-demo"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+description = "Reference CLI for Dripz: designs a curve, simulates the weight trajectory, and back-tests against synthetic demand profiles."
+repository.workspace = true
+homepage.workspace = true
+keywords = ["solana", "lbp", "cli", "dripz", "curve"]
+categories = ["command-line-utilities", "finance"]
+
+[[bin]]
+name = "dripz"
+path = "src/main.rs"
+
+[dependencies]
+anyhow = { workspace = true }
+clap = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }
+thiserror = { workspace = true }
+dripz-curves = { path = "../dripz-curves", version = "0.1.0", features = ["serde"] }
+dripz-engine = { path = "../dripz-engine", version = "0.1.0" }
+dripz-snipeguard = { path = "../dripz-snipeguard", version = "0.1.0" }
