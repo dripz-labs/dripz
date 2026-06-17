@@ -1,5 +1,9 @@
 # Dripz
 
+<p align="center">
+  <img src="hero.png" alt="A glacial cavern, ice ceiling, single droplet caught mid-fall" width="100%">
+</p>
+
 > Time-weighted Liquidity Bootstrapping Pool framework for Solana. Drop by drop.
 
 <p align="center">
@@ -56,6 +60,18 @@ This repository hosts the **public reference implementation**: a Rust workspace 
 | PATCHA bridge | Auto-migrate remaining liquidity into PATCHA CLMM hooks (production module) |
 
 The crates in this workspace are deliberately scoped to what can be reproduced from a clone alone -- pool math, curves, snipe guard, CLI. Bundling, vesting, and PATCHA migration live in the private repository because they require a live Solana mainnet wallet and an authenticated Jito searcher account.
+
+## Program identity
+
+The on-chain Anchor program is staged at the address below. Until the team publishes a finalized audit and runs the mainnet `solana program deploy`, the canonical program account stays uninitialized on mainnet -- callers can already pin the address in their config and the IDL is checked into the private monorepo at `packages/anchor-program/target/idl/dripz_lbp.json`.
+
+| Field | Value |
+| ----- | ----- |
+| Program ID | `AsxnSxBeFwtkzxchwVDxz1VBZRuePFXBcdodfcinTrQx` |
+| Anchor version | `0.31.1` |
+| Cluster | `solana mainnet-beta` (staging on devnet until audit closes) |
+| IDL artifact | `dripz_lbp.json` (in the private monorepo build output) |
+| Authority | upgrade authority is the project multisig described in [docs/security.md](docs/security.md) |
 
 ## Architecture
 
