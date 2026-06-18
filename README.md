@@ -32,7 +32,7 @@
   <img src="https://img.shields.io/badge/anchor-0.31-1A3A52?style=flat-square" alt="anchor">
 </p>
 
-Dripz is the Solana port of Balancer V2's weighted-pool Liquidity Bootstrapping Pool design. Instead of dumping every token at launch (Pump.fun-style waterfalls), each Dripz pool releases tokens **one drop at a time** along a time-weighted curve. The result is a fairer price discovery process, dramatically lower sniper-bot impact, and a clean migration path into PATCHA concentrated-liquidity pools after the auction closes.
+Dripz is the Solana port of Balancer V2's weighted-pool Liquidity Bootstrapping Pool design. Instead of dumping every token at launch (Pump.fun-style waterfalls), each Dripz pool releases tokens **one drop at a time** along a time-weighted curve. The result is a fairer price discovery process, dramatically lower sniper-bot impact, and a clean migration path into external CLMM pools after the auction closes.
 
 This repository hosts the **public reference implementation**: a Rust workspace with the five curve families, the Balancer-style pool math, the anti-snipe primitives, and a reference CLI. The production Anchor program, Next.js Curve Designer, Launchpad UI, FastAPI service, and Telegram notifier live in the private monorepo at `dripz.fi`.
 
@@ -57,9 +57,9 @@ This repository hosts the **public reference implementation**: a Rust workspace 
 | Anti-snipe layer | Per-tx max-buy cap + commit-reveal + rolling-window guard |
 | Anti-MEV layer | Jito bundle with DontFront tip pattern (production module) |
 | Vesting transition | Streamflow-compatible IDL emitted at LBP close (production module) |
-| PATCHA bridge | Auto-migrate remaining liquidity into PATCHA CLMM hooks (production module) |
+| CLMM bridge | Auto-migrate remaining liquidity into CLMM hooks (production module) |
 
-The crates in this workspace are deliberately scoped to what can be reproduced from a clone alone -- pool math, curves, snipe guard, CLI. Bundling, vesting, and PATCHA migration live in the private repository because they require a live Solana mainnet wallet and an authenticated Jito searcher account.
+The crates in this workspace are deliberately scoped to what can be reproduced from a clone alone -- pool math, curves, snipe guard, CLI. Bundling, vesting, and CLMM migration live in the private repository because they require a live Solana mainnet wallet and an authenticated Jito searcher account.
 
 ## Program identity
 
