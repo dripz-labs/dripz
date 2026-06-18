@@ -2,7 +2,7 @@
 
 use thiserror::Error;
 
-/// Errors emitted by the commit-reveal, max-buy, and rolling-window modules.
+/// Errors emitted by the per-tx max-buy cap module and the optional commit-reveal / rolling-window helpers.
 #[derive(Debug, Error, PartialEq, Eq)]
 pub enum SnipeGuardError {
     /// A commit was already registered for the given wallet in the current

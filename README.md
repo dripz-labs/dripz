@@ -54,7 +54,7 @@ This repository hosts the **public reference implementation**: a Rust workspace 
 | ------- | ----- |
 | 5 curve families | Linear, Exponential, Step, Dutch Auction, Fair Discovery |
 | Integer-only math | `u128` fixed point throughout; no floats cross the on-chain boundary |
-| Anti-snipe layer | Per-tx max-buy cap + commit-reveal + rolling-window guard |
+| Anti-snipe primitives | Per-tx max-buy cap (used by the executor today) + commit-reveal helper + rolling-window guard (available in the same crate for integrators) |
 | Anti-MEV layer | Jito bundle with DontFront tip pattern (production module) |
 | Vesting transition | Streamflow-compatible IDL emitted at LBP close (production module) |
 | CLMM bridge | Auto-migrate remaining liquidity into CLMM hooks (production module) |
@@ -104,7 +104,7 @@ github/
 ├── Cargo.toml             (workspace)
 ├── dripz-curves/          (five curve families; integer math)
 ├── dripz-engine/          (Balancer V2 weighted pool math)
-├── dripz-snipeguard/      (commit-reveal + max-buy + rolling window)
+├── dripz-snipeguard/      (anti-snipe primitives library: per-tx cap, commit-reveal helper, rolling window)
 ├── dripz-cli-demo/        (the `dripz` reference CLI)
 ├── sdk-demo/              (TypeScript curve simulator for the UI)
 ├── docs/

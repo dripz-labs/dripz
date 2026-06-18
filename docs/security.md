@@ -6,7 +6,7 @@
 - All state mutations pass through a `pool_authority` PDA. The authority's seeds are derived from `(pool_id, bump)` so anyone can verify a given account belongs to the expected pool.
 - **Reentrancy**. Every instruction sets a `locked` flag at entry and unsets it on the happy path. Cross-program invocations are forbidden while `locked` is true.
 - **Slippage**. Every buy / sell takes a `min_amount_out` argument that the caller signs. The on-chain math is bit-for-bit identical to `dripz-engine`, so SDK quotes and on-chain quotes agree.
-- **Anti-snipe**. The `dripz-snipeguard` per-tx cap runs as the first check inside `buy` during the protected window. The commit-reveal flow uses SHA-256 over `(wallet || amount || nonce)`.
+- **Anti-snipe**. The `dripz-snipeguard` per-tx cap is what the on-chain `buy` instruction enforces during the protected window. The same crate also ships a commit-reveal helper and a rolling-window guard, but the deployed program does not use them; they are available for integrators who want to extend their own program with those checks.
 - **Vesting**. The vesting rate is computed at `start_ts` and frozen; there is no admin update path.
 
 ## Off-chain service
@@ -31,7 +31,7 @@
 
 | Threat | Mitigation |
 | ------ | ---------- |
-| Sniper bot races the open block | `dripz-snipeguard` per-tx cap + commit-reveal |
+| Sniper bot races the open block | `dripz-snipeguard` per-tx cap (commit-reveal helper available in the same crate for integrators) |
 | MEV searcher sandwiches a buy | Jito bundle with DontFront + auto tip |
 | Issuer rugs vesting | Vesting rate immutable after `start_ts` |
 | Step curve transition front-run | Anchor sweep transaction inside the same Jito bundle |

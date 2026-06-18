@@ -1,6 +1,6 @@
 //! Per-wallet rolling-window purchase tracker.
 //!
-//! Used off-chain by the SDK and the Telegram bot to refuse bundle
+//! Used off-chain by the SDK and the indexer to refuse bundle
 //! construction once a wallet has spent more than its allocation inside the
 //! configured time window. The on-chain program does not track this
 //! directly; the Jito bundle builder is the one that drops bundles that

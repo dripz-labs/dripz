@@ -10,7 +10,7 @@
 //!    accepts the buy if the reveal matches the prior commit -- sniper
 //!    bots cannot front-run the reveal because the original commit hides the
 //!    intended amount.
-//! 3. **Wallet rolling window.** The off-chain SDK / Telegram bot tracks a
+//! 3. **Wallet rolling window.** The off-chain SDK / indexer tracks a
 //!    rolling per-wallet purchase volume and refuses to sign further bundles
 //!    once a wallet exceeds its share.
 //!

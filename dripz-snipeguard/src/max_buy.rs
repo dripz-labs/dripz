@@ -47,7 +47,7 @@ pub fn evaluate(
 }
 
 /// Convenience helper: returns the effective cap in tokens without making a
-/// decision. Used by Telegram bot embeds and the SDK's "preview" call.
+/// decision. Used by the indexer and the SDK's "preview" call.
 pub fn current_cap_tokens(config: &MaxBuyConfig, vault_balance: u64, current_slot: u64) -> u128 {
     let elapsed = current_slot.saturating_sub(config.launch_slot);
     if elapsed >= config.protected_slots {
