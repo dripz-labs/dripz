@@ -37,7 +37,7 @@ The default window is `[1, 20]` slots. A reveal that arrives outside the window 
 
 ## Layer 3 -- Wallet rolling window
 
-Off-chain (SDK + Telegram bot), the rolling-window guard tracks each wallet's cumulative spend across a moving time window. Once a wallet hits its allocation the bundle builder simply drops further buy bundles for that wallet.
+Off-chain (SDK + indexer), the rolling-window guard tracks each wallet's cumulative spend across a moving time window. Once a wallet hits its allocation the bundle builder simply drops further buy bundles for that wallet.
 
 ```rust
 use dripz_snipeguard::RollingWindow;

@@ -8,7 +8,7 @@
 //! - `backtest`  -- compare snipe-resistance metrics across two curves
 //!
 //! Everything below is pure integer math. The output JSON is consumed by the
-//! Next.js Curve Designer, the Telegram bot, and the verifier tests.
+//! Next.js Curve Designer, the event indexer, and the verifier tests.
 
 use anyhow::{anyhow, Context, Result};
 use clap::{Parser, Subcommand, ValueEnum};

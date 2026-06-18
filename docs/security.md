@@ -13,7 +13,7 @@
 
 - Helius RPC keys live only in `HELIUS_RPC_URL` (server env). The web client uses the public `https://api.mainnet-beta.solana.com` RPC.
 - The Jito block engine URL (`JITO_BLOCK_ENGINE_URL`) is server-only as well; bundle construction never leaves the backend.
-- The Telegram bot token (`TELEGRAM_BOT_TOKEN`) is held by the bot service. The token has no `send_messages_in_groups` scope; only the bot can post to its private channel.
+- Indexer credentials and any third-party API keys live only in the private backend env. The token-replay protection runs server-side; the web client never sees them.
 - CORS is allowlisted to four explicit origins (`https://dripz-web.vercel.app`, `https://dripz.fi`, `https://www.dripz.fi`, `http://localhost:3000`). Wildcards are forbidden and `allow_credentials=True`.
 
 ## Frontend

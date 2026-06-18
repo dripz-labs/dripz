@@ -18,11 +18,11 @@ graph TD
     Designer -->|websocket| Launchpad[Launchpad UI]
     Service -->|Anchor RPC| Program[dripz-lbp Anchor Program]
     Program -->|writes| State[(Pool PDA + Vesting PDA)]
-    Program -->|emit| Bot[Telegram Bot]
+    Program -->|emit| Indexer[Event Indexer]
     Engine[dripz-engine math] -->|integer mirror| Program
     Curves[dripz-curves library] --> Engine
     Snipe[dripz-snipeguard] --> Program
-    Snipe -->|wallet caps| Bot
+    Snipe -->|wallet caps| Indexer
 ```
 
 ## Component summary
@@ -41,7 +41,7 @@ graph TD
 2. The Designer calls the backend simulator, which calls `dripz-engine` to render the weight trajectory.
 3. When the issuer is satisfied, the Launchpad builds an Anchor transaction whose payload mirrors the same `CurveParams` struct used here.
 4. On-chain, the Anchor program evaluates the same integer-only curve math and refuses buys that breach the snipe-guard layer.
-5. The Telegram bot subscribes to the program's `Buy` / `Sell` event stream and pushes notifications to issuers and traders.
+5. The event indexer subscribes to the program's `Buy` / `Sell` event stream and updates the public dashboard at https://dripz.fi/launchpad.
 
 ## Integer parity
 

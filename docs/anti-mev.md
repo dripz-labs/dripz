@@ -36,7 +36,7 @@ When the next slot crosses a Step curve boundary, the on-chain program inserts a
 
 ## Backtest harness
 
-`dripz-cli-demo backtest` runs every curve through a synthetic demand profile and reports the first-5%-window volume share. We do not yet ship the Jito-vs-no-Jito benchmark in this repository because it requires a live mainnet RPC. The production Telegram bot publishes those numbers daily.
+`dripz-cli-demo backtest` runs every curve through a synthetic demand profile and reports the first-5%-window volume share. We do not yet ship the Jito-vs-no-Jito benchmark in this repository because it requires a live mainnet RPC. The production indexer publishes those numbers daily on https://dripz.fi.
 
 ## References
 

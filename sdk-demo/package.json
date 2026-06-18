@@ -2,7 +2,7 @@
   "name": "dripz-sdk-demo",
   "version": "0.1.0",
   "private": true,
-  "description": "TypeScript reference simulator for the Dripz LBP framework. Mirrors the Rust workspace; the published @dripz/sdk package lives in the production repository.",
+  "description": "TypeScript reference simulator for the Dripz LBP framework. Mirrors the Rust workspace; published on npm as @dripzfi/sdk.",
   "license": "MIT",
   "type": "module",
   "main": "dist/index.js",

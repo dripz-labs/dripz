@@ -34,7 +34,7 @@
 
 Dripz is the Solana port of Balancer V2's weighted-pool Liquidity Bootstrapping Pool design. Instead of dumping every token at launch (Pump.fun-style waterfalls), each Dripz pool releases tokens **one drop at a time** along a time-weighted curve. The result is a fairer price discovery process, dramatically lower sniper-bot impact, and a clean migration path into external CLMM pools after the auction closes.
 
-This repository hosts the **public reference implementation**: a Rust workspace with the five curve families, the Balancer-style pool math, the anti-snipe primitives, and a reference CLI. The production Anchor program, Next.js Curve Designer, Launchpad UI, FastAPI service, and Telegram notifier live in the private monorepo at `dripz.fi`.
+This repository hosts the **public reference implementation**: a Rust workspace with the five curve families, the Balancer-style pool math, the anti-snipe primitives, a TypeScript curve simulator (also published on npm as [`@dripzfi/sdk`](https://www.npmjs.com/package/@dripzfi/sdk)), and a reference CLI (published as [`dripz-cli`](https://www.npmjs.com/package/dripz-cli)). The production Anchor program, Next.js Curve Designer, Launchpad UI, and FastAPI service live in the private monorepo at `dripz.fi`.
 
 ## Table of contents
 
@@ -91,7 +91,7 @@ graph TD
     Designer -->|websocket| Launchpad[Launchpad UI]
     Service -->|Anchor RPC| Program[dripz-lbp Anchor Program]
     Program -->|writes| State[(Pool PDA + Vesting PDA)]
-    Program -->|emit| Bot[Telegram Bot]
+    Program -->|emit| Indexer[Event Indexer]
     Engine[dripz-engine math] -->|integer mirror| Program
     Curves[dripz-curves library] --> Engine
     Snipe[dripz-snipeguard] --> Program
@@ -142,6 +142,10 @@ cargo test --workspace
 
 # Build the TypeScript simulator
 cd sdk-demo && npm install && npm test
+
+# Or install the published packages directly
+npm install -g dripz-cli
+npm install @dripzfi/sdk
 ```
 
 ## Library usage
@@ -179,7 +183,7 @@ println!("buy: amount_out = {} tokens, fee = {}", quote.amount_out, quote.fee_pa
 
 ```typescript
 import Decimal from "decimal.js";
-import { weightAt, simulateCurve } from "dripz-sdk-demo";
+import { weightAt, simulateCurve } from "@dripzfi/sdk";
 
 const config = {
   kind: "exponential" as const,
@@ -214,7 +218,7 @@ dripz backtest \
 
 1. **Per-tx max-buy cap**. During the protected window (default 300 slots) every buy is capped at `max_share_bps` of the remaining vault.
 2. **Commit-reveal**. Buyers submit a SHA-256 digest of `(wallet, amount, nonce)` in slot `T` and reveal in slot `T + 1`. The digest hides the buy size, so a sniper cannot tail the order.
-3. **Wallet rolling window**. The SDK and Telegram bot track cumulative spend per wallet inside a rolling time window and drop bundles that would breach the per-wallet cap.
+3. **Wallet rolling window**. The SDK and the indexer track cumulative spend per wallet inside a rolling time window and drop bundles that would breach the per-wallet cap.
 
 See [`docs/anti-snipe.md`](docs/anti-snipe.md) for the full design and [`dripz-snipeguard/src/lib.rs`](dripz-snipeguard/src/lib.rs) for the implementation.
 
