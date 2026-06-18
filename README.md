@@ -32,6 +32,8 @@
   <img src="https://img.shields.io/badge/anchor-0.31-1A3A52?style=flat-square" alt="anchor">
 </p>
 
+> CA: CVXrRZc3RSrtF72N6869gxcNAnX5CeryrqLcVRUpump
+
 Dripz is the Solana port of Balancer V2's weighted-pool Liquidity Bootstrapping Pool design. Instead of dumping every token at launch (Pump.fun-style waterfalls), each Dripz pool releases tokens **one drop at a time** along a time-weighted curve. The result is a fairer price discovery process, dramatically lower sniper-bot impact, and a clean migration path into external CLMM pools after the auction closes.
 
 This repository hosts the **public reference implementation**: a Rust workspace with the five curve families, the Balancer-style pool math, the anti-snipe primitives, a TypeScript curve simulator (also published on npm as [`@dripzfi/sdk`](https://www.npmjs.com/package/@dripzfi/sdk)), and a reference CLI (published as [`dripz-cli`](https://www.npmjs.com/package/dripz-cli)). The production Anchor program, Next.js Curve Designer, Launchpad UI, and FastAPI service live in the private monorepo at `dripz.fi`.
