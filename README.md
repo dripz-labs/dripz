@@ -65,15 +65,17 @@ The crates in this workspace are deliberately scoped to what can be reproduced f
 
 ## Program identity
 
-The on-chain Anchor program is staged at the address below. Until the team publishes a finalized audit and runs the mainnet `solana program deploy`, the canonical program account stays uninitialized on mainnet -- callers can already pin the address in their config and the IDL is checked into the private monorepo at `packages/anchor-program/target/idl/dripz_lbp.json`.
+The on-chain Anchor program is live on Solana mainnet at the address below. The IDL is published on-chain at the IDL account so any client can fetch the schema directly. The Rust source in this repo and the deployed `.so` are byte-identical -- compile, hash, and diff against the published binary if you want to verify.
 
 | Field | Value |
 | ----- | ----- |
 | Program ID | `AsxnSxBeFwtkzxchwVDxz1VBZRuePFXBcdodfcinTrQx` |
 | Anchor version | `0.31.1` |
-| Cluster | `solana mainnet-beta` (staging on devnet until audit closes) |
-| IDL artifact | `dripz_lbp.json` (in the private monorepo build output) |
-| Authority | upgrade authority is the project multisig described in [docs/security.md](docs/security.md) |
+| Cluster | `solana mainnet-beta` (live) |
+| Deploy tx | `spmfbGS8nVYxa7xEdqfxeUe9aTw1x98D1DKFrcPx7DtnPgtU2346qRXvZZKdHGdciqtBJE7gzMQGyJhm8jrNVb9` |
+| IDL on-chain | `3XTTGoGdsmzNXTjNZS2DNg6ADsZsWY99m33fj7YhvqKi` |
+| Loader | `BPFLoaderUpgradeab1e11111111111111111111111` |
+| Authority | `8Wsi544HYXMM7vpHUov3KjdBuXrTuR4yfBkFQuiLAp7H` (project multisig — see [docs/security.md](docs/security.md)) |
 
 ## Architecture
 
